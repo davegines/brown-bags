@@ -1,5 +1,5 @@
 import sys
-from v1.command_executor import CommandExecutor
+from CommandPattern.v1.command_executor import CommandExecutor
 
 if len(sys.argv) < 2:
     print('Commands:')

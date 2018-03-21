@@ -1,4 +1,4 @@
-from v2.command_abc import CommandAbc
+from CommandPattern.v2.command_abc import CommandAbc
 
 
 class UpdateOrder(CommandAbc):

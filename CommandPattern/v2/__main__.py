@@ -1,6 +1,6 @@
 import sys
-from v2.create_order import CreateOrder
-from v2.update_order import UpdateOrder
+from CommandPattern.v2.create_order import CreateOrder
+from CommandPattern.v2.update_order import UpdateOrder
 
 if len(sys.argv) < 2:
     print('Commands:')
