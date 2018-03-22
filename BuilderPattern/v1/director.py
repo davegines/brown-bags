@@ -4,6 +4,6 @@ class Director:
 
     def construct(self, builder):
         self.builder = builder
-        self.builder.build_part_a()
-        self.builder.build_part_b()
-        self.builder.build_part_c()
+        self.builder.build_header()
+        self.builder.build_body()
+        self.builder.build_footer()
