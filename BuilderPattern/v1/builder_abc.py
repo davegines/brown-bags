@@ -3,7 +3,7 @@ import abc
 
 class BuilderAbc(metaclass=abc.ABCMeta):
     def __init__(self):
-        self.rentplus_filing = ''
+        self.full_file_contents = ''
 
     @abc.abstractmethod
     def build_header(self):

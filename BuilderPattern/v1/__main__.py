@@ -6,12 +6,12 @@ director = Director()
 
 transunion_builder = TransUnionBuilder()
 director.construct(transunion_builder)
-transunion_product = transunion_builder.rentplus_filing
+transunion_file = transunion_builder.full_file_contents
 
-print(transunion_product, '\n')
+print(transunion_file, '\n')
 
 equifax_builder = EquifaxBuilder()
 director.construct(equifax_builder)
-equifax_product = equifax_builder.rentplus_filing
+equifax_file = equifax_builder.full_file_contents
 
-print(equifax_product)
+print(equifax_file)

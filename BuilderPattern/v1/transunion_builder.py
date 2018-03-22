@@ -3,10 +3,10 @@ from BuilderPattern.v1.builder_abc import BuilderAbc
 
 class TransUnionBuilder(BuilderAbc):
     def build_header(self):
-        self.rentplus_filing = 'TransUnion Fixed Width Header\n'
+        self.full_file_contents = 'TransUnion Fixed Width Header\n'
 
     def build_body(self):
-        self.rentplus_filing += 'Contents  Here\n'
+        self.full_file_contents += 'Contents  Here\n'
 
     def build_footer(self):
-        self.rentplus_filing += 'Footer  Here'
+        self.full_file_contents += 'Footer  Here'
