@@ -1,0 +1,36 @@
+
+
+Select a.firstName, a.LastName, name, b.FirstName, b.LastName
+from person a join personphone perp on perp.personId = a.ID
+join Phone ph on ph.Id = perp.phoneId
+join phone ph2 on ph2.phonenumber = ph.Phonenumber
+join phonetype pt on pt.id = ph2.phonetypeid
+join personphone perpho on perpho.PhoneId = ph2.Id
+join person b on b.Id = perpho.personid
+where ph2.id != ph.ID
+
+
+
+
+
+
+SELECT pa.FirstName, pa.LastName,
+	   pb.FirstName, pb.LastName,
+	   pt.Name AS PhoneType
+FROM Person pa
+	JOIN PersonPhone ppa ON ppa.PersonID = pa.ID
+		JOIN Phone pha ON pha.ID = ppa.PhoneID
+		JOIN Phone phb ON phb.PhoneNumber = pha.PhoneNumber 		/*** Matching phone numbers ***/
+			JOIN PersonPhone ppb ON ppb.PhoneID = phb.ID
+				JOIN Person pb ON pb.ID = ppb.PersonID
+			JOIN PhoneType pt ON pt.ID = pha.PhoneTypeID
+WHERE pha.ID != phb.ID 												/*** Ensure when we match on PhoneNumber that we're not matching on ourselves ***/
+
+
+
+
+
+Organization - layout of the code
+Consistent casing
+White space
+Comments

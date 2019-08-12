@@ -3,6 +3,7 @@ from Exercises.simple_exercises.exercises import SampleExercises as se
 
 
 class SimpleTest(unittest.TestCase):
+    # get_adjacent_elements_with_max_product
     def test_empty_array_should_return_none(self):
         result = se.get_adjacent_elements_with_max_product([])
         self.assertIsNone(result)
@@ -30,3 +31,10 @@ class SimpleTest(unittest.TestCase):
     def test_array_with_0_neg5_6_should_return_0(self):
         result = se.get_adjacent_elements_with_max_product([0, -5, 6])
         self.assertEqual(0, result)
+
+
+
+    # are_anagrams
+    def test_are_anagramss(self):
+        are_anagrams = se.are_anagrams('listen', 'silent')
+        self.assertTrue(are_anagrams)

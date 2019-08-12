@@ -1,7 +1,12 @@
-from CodeReadability.fizz_buzz import FizzBuzz
+from CodeReadability.finder import *
 
-fizz_buzz = FizzBuzz()
-numbers = list(range(25))
-results = fizz_buzz.execute(numbers)
 
-print(results)
+p1 = P('Don', 16)
+p2 = P('Sally', 50)
+
+finder = Finder()
+yng = finder.find([p1, p2])
+
+print('youngest')
+print(yng)
+

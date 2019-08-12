@@ -45,3 +45,27 @@ def adjacent_elements_product(input_array):
 # print(adjacent_elements_product([3, 6, -2, -5, 7, 3]))  # expect result = 21
 # print(adjacent_elements_product([1, -2, 2]))  # expect result = -2
 # print(adjacent_elements_product([1]))  # expect result = None
+
+
+'''Given two strings, return whether or not they are anagrams'''
+def are_anagrams(s1, s2):
+    c1 = [0] * 26
+    c2 = [0] * 26
+
+    for i in range(len(s1)):
+        pos = ord(s1[i]) - ord('a')
+        c1[pos] = c1[pos] + 1
+
+    for i in range(len(s2)):
+        pos = ord(s2[i]) - ord('a')
+        c2[pos] = c2[pos] + 1
+
+    j = 0
+    still_ok = True
+    while j < 26 and still_ok:
+        if c1[j] == c2[j]:
+            j = j + 1
+        else:
+            still_ok = False
+
+    return still_ok

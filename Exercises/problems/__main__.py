@@ -20,3 +20,12 @@ def is_palindrome(word):
 
 print(is_palindrome('dad'))  # expect True
 print(is_palindrome('Max'))  # expect False
+
+
+
+'''Given two strings, return whether or not they are anagrams'''
+def are_anagrams(word_1, word_2):
+    return True
+
+print(are_anagrams('listen', 'silent'))  # expect True
+print(are_anagrams('dog', 'cat'))  # expect False

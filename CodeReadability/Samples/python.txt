@@ -1,0 +1,135 @@
+
+
+Does it overlap?
+return (begin >= other.begin && begin < other.end) ||
+       (end > other.begin && end <= other.end) || 
+       (begin <= other.begin && end >= other.end);
+
+
+Finding the opposite is easier. Determine if it doesn't overlap and return that.
+bool Range::OverlapsWith(Range other) {
+    if (other.end <= begin) return false;  // They end before we begin
+    if (other.begin >= end) return false;  // They begin after we end
+
+    return true;  // Only possibility left: they overlap
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@classmethod
+def get_total_minutes_assigned_during_time_period(cls, start, end, appointments, blocked_appt_times=None):
+    minutes_assigned = 0
+    start = start.replace(tzinfo=None)
+    end = end.replace(tzinfo=None)
+
+    if blocked_appt_times is not None:
+        for blocked_appt_time in blocked_appt_times:
+            blocked_start = None
+            blocked_end = None
+
+            # check if 'date' falls within our time range
+            if blocked_appt_time.date is not None:
+                blocked_start = blocked_appt_time.date.replace(tzinfo=None, hour=blocked_appt_time.start_time.hour,
+                                                               minute=blocked_appt_time.start_time.minute)
+                blocked_end = blocked_appt_time.date.replace(tzinfo=None, hour=blocked_appt_time.end_time.hour,
+                                                             minute=blocked_appt_time.end_time.minute)
+
+            # check if 'day_of_week_recur' falls within our time range
+            if blocked_appt_time.day_of_week_recur is not None and start.isoweekday() <= blocked_appt_time.day_of_week_recur.id <= end.isoweekday():
+                blocked_start = start.replace(hour=blocked_appt_time.start_time.hour, minute=blocked_appt_time.start_time.minute)
+                blocked_end = end.replace(hour=blocked_appt_time.end_time.hour, minute=blocked_appt_time.end_time.minute)
+
+            # check if 'start_time' or 'end_time' falls within our time range or any in between
+            if blocked_start is not None and blocked_end is not None and blocked_start < end and start < blocked_end:
+                minutes_assigned = minutes_assigned + cls.get_blocked_appt_time_duration(blocked_appt_time)
+
+    for appt in appointments:
+        appt_start, appt_end = cls.get_actual_start_and_end_time(appt)
+        if start <= appt_start < end or start < appt_end <= end:
+            appt_duration = (appt_end - appt_start).seconds / 60
+            minutes_assigned = minutes_assigned + appt_duration
+
+    return minutes_assigned
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@classmethod
+def get_total_minutes_assigned_during_time_period(cls, start, end, appointments, blocked_appt_times=None):
+    minutes_assigned = 0
+    start = start.replace(tzinfo=None)
+    end = end.replace(tzinfo=None)
+
+    if blocked_appt_times is not None:
+        for blocked_appt_time in blocked_appt_times:
+            blocked_start = None
+            blocked_end = None
+
+            if blocked_out_single_date(blocked_appt_time):
+                blocked_start, blocked_end = get_start_and_end_times_for_single_blocked_out_date(blocked_appt_time)
+
+            if blocked_out_recurring_day(blocked_appt_time, start, end):
+                blocked_start, blocked_end = get_start_and_end_times_for_recurring_day(blocked_appt_time, start, end)
+
+            if time_is_blocked_out(blocked_start, blocked_end, start, end):
+                minutes_assigned += cls.get_blocked_appt_time_duration(blocked_appt_time)
+
+    for appt in appointments:
+        appt_start, appt_end = cls.get_actual_start_and_end_time(appt)
+        if exists_any_time_overlap(appt_start, appt_end, start, end):
+            appt_duration = (appt_end - appt_start).seconds / 60
+            minutes_assigned += appt_duration
+
+    return minutes_assigned
+
+
+
+
+
+def blocked_out_single_date(blocked_appt_time)
+    return blocked_appt_time.date is not None
+
+def blocked_out_recurring_day(blocked_appt_time, start, end)
+    return blocked_appt_time.day_of_week_recur is not None and start.isoweekday() <= blocked_appt_time.day_of_week_recur.id <= end.isoweekday()
+
+def get_start_and_end_times_for_single_blocked_out_date(blocked_appt_time):
+    blocked_start = blocked_appt_time.date.replace(tzinfo=None, hour=blocked_appt_time.start_time.hour,
+                                                   minute=blocked_appt_time.start_time.minute)
+    blocked_end = blocked_appt_time.date.replace(tzinfo=None, hour=blocked_appt_time.end_time.hour,
+                                                  minute=blocked_appt_time.end_time.minute)
+
+    return blocked_start, blocked_end
+
+def get_start_and_end_times_for_recurring_day(blocked_appt_time, start, end):
+    blocked_start = start.replace(hour=blocked_appt_time.start_time.hour, minute=blocked_appt_time.start_time.minute)
+    blocked_end = end.replace(hour=blocked_appt_time.end_time.hour, minute=blocked_appt_time.end_time.minute)
+
+    return blocked_start, blocked_end
+
+def time_is_blocked_out(blocked_start, blocked_end, start, end):
+    # check if 'start_time' or 'end_time' falls within our time range or any in between
+    return blocked_start is not None and blocked_end is not None and blocked_start < end and start < blocked_end
+
+def exists_any_time_overlap(appt_start, appt_end, start, end):
+    return start <= appt_start < end or start < appt_end <= end
