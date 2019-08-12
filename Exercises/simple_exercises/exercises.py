@@ -1,5 +1,14 @@
 class SampleExercises:
     @staticmethod
+    def word_wrap(word, wrap_at):
+        length_of_word = len(word)
+        if length_of_word > wrap_at:
+            first_part_of_word = word[:wrap_at] + '\r'
+            remainder_of_word = word[wrap_at:]
+            return first_part_of_word + SampleExercises.word_wrap(remainder_of_word, wrap_at)
+        return word
+
+    @staticmethod
     def get_adjacent_elements_with_max_product(int_array):
         if len(int_array) == 1:
             return int_array[0]
@@ -12,7 +21,6 @@ class SampleExercises:
             return max_val
 
         return None
-
 
     '''Given two strings, return whether or not they are anagrams'''
     @staticmethod

@@ -3,6 +3,23 @@ from Exercises.simple_exercises.exercises import SampleExercises as se
 
 
 class SimpleTest(unittest.TestCase):
+    # word wrap
+    def test_word_wrap_should_return_the_word_if_column_wrap_number_is_greater_than_length_of_word(self):
+        wrapped_content = se.word_wrap(word='a', wrap_at=100)
+        self.assertEqual('a', wrapped_content)
+
+    def test_word_wrap_should_return_the_word_if_column_wrap_number_is_equal_to_the_length_of_word(self):
+        wrapped_content = se.word_wrap(word='abcd', wrap_at=4)
+        self.assertEqual('abcd', wrapped_content)
+
+    def test_word_wrap_should_return_one_line_wrap(self):
+        wrapped_content = se.word_wrap(word='abcd', wrap_at=2)
+        self.assertEqual('ab\rcd', wrapped_content)
+
+    def test_word_wrap_should_wrap_on_partial_line(self):
+        wrapped_content = se.word_wrap(word='abcde', wrap_at=2)
+        self.assertEqual('ab\rcd\re', wrapped_content)
+
     # get_adjacent_elements_with_max_product
     def test_empty_array_should_return_none(self):
         result = se.get_adjacent_elements_with_max_product([])
@@ -31,7 +48,6 @@ class SimpleTest(unittest.TestCase):
     def test_array_with_0_neg5_6_should_return_0(self):
         result = se.get_adjacent_elements_with_max_product([0, -5, 6])
         self.assertEqual(0, result)
-
 
 
     # are_anagrams
