@@ -14,11 +14,28 @@ class SimpleTest(unittest.TestCase):
 
     def test_word_wrap_should_return_one_line_wrap(self):
         wrapped_content = se.word_wrap(word='abcd', wrap_at=2)
-        self.assertEqual('ab\rcd', wrapped_content)
+        self.assertEqual('ab\ncd', wrapped_content)
 
     def test_word_wrap_should_wrap_on_partial_line(self):
         wrapped_content = se.word_wrap(word='abcde', wrap_at=2)
-        self.assertEqual('ab\rcd\re', wrapped_content)
+        self.assertEqual('ab\ncd\ne', wrapped_content)
+
+    # word wrap2
+    def test_word_wrap2_should_return_the_word_if_column_wrap_number_is_greater_than_length_of_word(self):
+        wrapped_content = se.word_wrap2(word='a', wrap_at=100)
+        self.assertEqual('a', wrapped_content)
+
+    def test_word_wrap2_should_return_the_word_if_column_wrap_number_is_equal_to_the_length_of_word(self):
+        wrapped_content = se.word_wrap2(word='abcd', wrap_at=4)
+        self.assertEqual('abcd', wrapped_content)
+
+    def test_word_wrap2_should_return_one_line_wrap(self):
+        wrapped_content = se.word_wrap2(word='abcd', wrap_at=2)
+        self.assertEqual('ab\ncd', wrapped_content)
+
+    def test_word_wrap2_should_wrap_on_partial_line(self):
+        wrapped_content = se.word_wrap2(word='abcde', wrap_at=2)
+        self.assertEqual('ab\ncd\ne', wrapped_content)
 
     # get_adjacent_elements_with_max_product
     def test_empty_array_should_return_none(self):

@@ -3,10 +3,26 @@ class SampleExercises:
     def word_wrap(word, wrap_at):
         length_of_word = len(word)
         if length_of_word > wrap_at:
-            first_part_of_word = word[:wrap_at] + '\r'
+            first_part_of_word = word[:wrap_at] + '\n'
             remainder_of_word = word[wrap_at:]
             return first_part_of_word + SampleExercises.word_wrap(remainder_of_word, wrap_at)
         return word
+
+    @staticmethod
+    def word_wrap2(word, wrap_at):
+        length_of_word = len(word)
+        if length_of_word > wrap_at:
+            formatted_word = ''
+            while length_of_word > wrap_at:
+                first_part_of_word = word[:wrap_at] + '\n'
+                formatted_word += first_part_of_word
+                word = word[wrap_at:]
+                length_of_word = len(word)
+            if length_of_word > 0:
+                formatted_word += word
+            return formatted_word.rstrip('\n')
+        else:
+            return word
 
     @staticmethod
     def get_adjacent_elements_with_max_product(int_array):
