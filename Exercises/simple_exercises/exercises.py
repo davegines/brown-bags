@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from Exercises.simple_exercises.utils import RomanNumeralConverter, OrderedSet
 import re
 
 
@@ -6,19 +7,28 @@ class SampleExercises:
     # Dept meeting Aug 22, 2019
     @staticmethod
     def get_roman_numeral(int_number):
-        return ''
+        rnc = RomanNumeralConverter()
+        return rnc.convertIntegerToRomanNumeral(int_number)
+
+    @staticmethod
+    def convert_roman_numeral(roman_numeral):
+        rnc = RomanNumeralConverter()
+        return rnc.convertRomanNumeralToInteger(roman_numeral)
 
     # Dept meeting Aug 22, 2019
     @staticmethod
     def remove_duplicate_words(phrase):
-        return ''
+        return str(OrderedSet(phrase.split())) # a standard set does not maintain order
 
     # Dept meeting Aug 22, 2019
     @staticmethod
     def dict_replacer(phrase, dictionary):
-        return ''
+        replace_me = re.compile('(<([^>]*)>)')
 
+        for match in replace_me.findall(phrase):
+            phrase = re.compile(match[0]).sub(dictionary[match[1]], phrase)
 
+        return phrase
 
 
     @staticmethod
