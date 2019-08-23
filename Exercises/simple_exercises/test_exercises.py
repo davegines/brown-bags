@@ -46,7 +46,7 @@ class SimpleTest(unittest.TestCase):
         self.assertEqual('I think Nate lives in Idaho.', result)
 
 
-    # Roman numeral
+    # Integer to Roman numeral
     def test_get_roman_numeral_one(self):
         roman_numeral = se.get_roman_numeral(1)
         self.assertEqual('I', roman_numeral)
@@ -74,6 +74,35 @@ class SimpleTest(unittest.TestCase):
     def test_get_roman_numeral_ten(self):
         roman_numeral = se.get_roman_numeral(10)
         self.assertEqual('X', roman_numeral)
+
+    # Roman numeral to Integer
+    def test_convert_roman_numeral_one(self):
+        roman_numeral = se.convert_roman_numeral('I')
+        self.assertEqual(1, roman_numeral)
+
+    def test_convert_roman_numeral_three(self):
+        roman_numeral = se.convert_roman_numeral('III')
+        self.assertEqual(3, roman_numeral)
+
+    def test_convert_roman_numeral_four(self):
+        roman_numeral = se.convert_roman_numeral('IV')
+        self.assertEqual(4, roman_numeral)
+
+    def test_convert_roman_numeral_five(self):
+        roman_numeral = se.convert_roman_numeral('V')
+        self.assertEqual(5, roman_numeral)
+
+    def test_convert_roman_numeral_six(self):
+        roman_numeral = se.convert_roman_numeral('VI')
+        self.assertEqual(6, roman_numeral)
+
+    def test_convert_roman_numeral_nine(self):
+        roman_numeral = se.convert_roman_numeral('IX')
+        self.assertEqual(9, roman_numeral)
+
+    def test_convert_roman_numeral_ten(self):
+        roman_numeral = se.convert_roman_numeral('X')
+        self.assertEqual(10, roman_numeral)
 
 
 
