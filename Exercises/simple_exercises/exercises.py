@@ -1,8 +1,113 @@
 from datetime import datetime, timedelta
+from collections import OrderedDict
 import re
+import math
 
 
 class SampleExercises:
+    @staticmethod
+    def tribonacci(signature, n):
+        if n < 3:
+            return signature[:n]
+
+        iterations = n - len(signature)
+
+        while iterations > 0:
+            signature.append(sum(signature[-3:]))
+            iterations -= 1
+
+        return signature
+
+    @staticmethod
+    def tickets(people):
+        twenty_fives = 0
+        fifties = 0
+        one_hundreds = 0
+
+        for i, bill_size in enumerate(people, start=1):
+            if bill_size == 100:
+                if fifties >= 1 and twenty_fives >= 1:
+                    fifties -= 1
+                    twenty_fives -= 1
+                elif twenty_fives >= 2:
+                    twenty_fives -= 2
+                else:
+                    return "NO"
+
+                one_hundreds += 1
+            elif bill_size == 50:
+                if twenty_fives >= 1:
+                    twenty_fives -= 1
+                else:
+                    return "NO"
+                fifties += 1
+            else:
+                twenty_fives += 1
+
+        return "YES"
+
+    @staticmethod
+    def digital_root(n):
+        reduced = sum([int(x) for x in str(n)])
+        if reduced > 9:
+            return SampleExercises.digital_root(reduced)
+        return reduced
+
+    @staticmethod
+    def is_prime(num):
+        if (num % 2 == 0 and num > 2) or num < 2:
+            return False
+
+        return all([num % i != 0 for i in range(3, int(math.sqrt(num)) + 1, 2)])
+
+    @staticmethod
+    def remove_smallest(numbers):
+        if len(numbers) == 0:
+            return numbers
+
+        return [num for idx, num in enumerate(numbers) if idx != numbers.index(min(numbers))]
+
+    @staticmethod
+    def sort_array(source_array):
+        odd_numbers = [a for a in source_array if a % 2 != 0]
+        sorted_odd_numbers = sorted(odd_numbers)
+
+        i = 0
+        sorted_array = []
+        for a in source_array:
+            if a % 2 == 0:
+                sorted_array.append(a)
+            else:
+                sorted_array.append(sorted_odd_numbers[i])
+                i += 1
+        return sorted_array
+
+    @staticmethod
+    def order(sentence):
+        if len(sentence) == 0:
+            return ''
+
+        order_of_words = re.findall(r'\d', sentence)
+        order_of_words_int = [int(w) for w in order_of_words]
+
+        words = sentence.split()
+
+        word_dict = dict(zip(order_of_words_int, words))
+
+        ordered_dict = OrderedDict(sorted(word_dict.items()))
+        ordered_sentence = ' '.join(ordered_dict.values())
+        return ordered_sentence
+
+    @staticmethod
+    def row_sum_odd_numbers(n):
+        return n ** 3
+
+    @staticmethod
+    def get_creditcard_number(cc):
+        if len(cc) <= 4:
+            return cc
+        return ('#' * (len(cc) - 4)) + cc[-4:]
+
     # Dept meeting Aug 22, 2019
     @staticmethod
     def get_roman_numeral(int_number):

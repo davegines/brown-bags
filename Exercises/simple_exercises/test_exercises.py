@@ -4,6 +4,74 @@ from Exercises.simple_exercises.exercises import SampleExercises as se
 
 
 class SimpleTest(unittest.TestCase):
+    def test_tribinocci(self):
+        self.assertEqual(se.tribonacci([1, 1, 1], 10), [1, 1, 1, 3, 5, 9, 17, 31, 57, 105])
+        self.assertEqual(se.tribonacci([0, 0, 1], 10), [0, 0, 1, 1, 2, 4, 7, 13, 24, 44])
+        self.assertEqual(se.tribonacci([0, 1, 1], 10), [0, 1, 1, 2, 4, 7, 13, 24, 44, 81])
+        self.assertEqual(se.tribonacci([1, 0, 0], 10), [1, 0, 0, 1, 1, 2, 4, 7, 13, 24])
+        self.assertEqual(se.tribonacci([0, 0, 0], 10), [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.assertEqual(se.tribonacci([1, 2, 3], 10), [1, 2, 3, 6, 11, 20, 37, 68, 125, 230])
+        self.assertEqual(se.tribonacci([3, 2, 1], 10), [3, 2, 1, 6, 9, 16, 31, 56, 103, 190])
+        self.assertEqual(se.tribonacci([1, 1, 1], 1), [1])
+        self.assertEqual(se.tribonacci([300, 200, 100], 0), [])
+        self.assertEqual(se.tribonacci([0.5, 0.5, 0.5], 30),
+                           [0.5, 0.5, 0.5, 1.5, 2.5, 4.5, 8.5, 15.5, 28.5, 52.5, 96.5, 177.5, 326.5, 600.5, 1104.5,
+                            2031.5, 3736.5, 6872.5, 12640.5, 23249.5, 42762.5, 78652.5, 144664.5, 266079.5, 489396.5,
+                            900140.5, 1655616.5, 3045153.5, 5600910.5, 10301680.5])
+
+    def test_tickets(self):
+        self.assertEqual(se.tickets([25, 25, 50]), "YES")
+        self.assertEqual(se.tickets([25, 100]), "NO")
+        self.assertEqual(se.tickets([25, 25, 50, 50, 100]), "NO")
+        self.assertEqual(se.tickets([25, 25, 25, 25, 25, 25, 25, 50, 50, 50, 100, 100, 100, 100]), "NO")
+
+    def test_digital_root(self):
+        self.assertEqual(se.digital_root(16), 7)
+        self.assertEqual(se.digital_root(456), 6)
+
+    def test_basic(self):
+        self.assertEqual(se.is_prime(0),  False, "0  is not prime")
+        self.assertEqual(se.is_prime(1),  False, "1  is not prime")
+        self.assertEqual(se.is_prime(2),  True, "2  is prime")
+        self.assertEqual(se.is_prime(73), True, "73 is prime")
+        self.assertEqual(se.is_prime(75), False, "75 is not prime")
+        self.assertEqual(se.is_prime(-1), False, "-1 is not prime")
+
+    def test_remove_smallest(self):
+        self.assertEqual(se.remove_smallest([1, 2, 3, 4, 5]), [2, 3, 4, 5], "Wrong result for [1, 2, 3, 4, 5]")
+        self.assertEqual(se.remove_smallest([5, 3, 2, 1, 4]), [5, 3, 2, 4], "Wrong result for [5, 3, 2, 1, 4]")
+        self.assertEqual(se.remove_smallest([1, 2, 3, 1, 1]), [2, 3, 1, 1], "Wrong result for [1, 2, 3, 1, 1]")
+        self.assertEqual(se.remove_smallest([]), [], "Wrong result for []")
+
+    def test_sort_array(self):
+        self.assertEqual(se.sort_array([5, 3, 2, 8, 1, 4]), [1, 3, 2, 8, 5, 4])
+        self.assertEqual(se.sort_array([5, 3, 1, 8, 0]), [1, 3, 5, 8, 0])
+        self.assertEqual(se.sort_array([]), [])
+
+    def test_order(self):
+        self.assertEqual(se.order("is2 Thi1s T4est 3a"), "Thi1s is2 3a T4est")
+        self.assertEqual(se.order("4of Fo1r pe6ople g3ood th5e the2"), "Fo1r the2 g3ood 4of th5e pe6ople")
+        self.assertEqual(se.order(""), "")
+
+    def test_row_sum_odd_numbers(self):
+        self.assertEqual(1, se.row_sum_odd_numbers(1))
+        self.assertEqual(8, se.row_sum_odd_numbers(2))
+        self.assertEqual(2197, se.row_sum_odd_numbers(13))
+        self.assertEqual(6859, se.row_sum_odd_numbers(19))
+        self.assertEqual(68921, se.row_sum_odd_numbers(41))
+
+    def test_get_creditcard_number_empty_string(self):
+        result = se.get_creditcard_number('')
+        self.assertEqual('', result)
+
+    def test_get_creditcard_number_all_characters(self):
+        result = se.get_creditcard_number('1234')
+        self.assertEqual('1234', result)
+
+    def test_get_creditcard_number_split_characters(self):
+        result = se.get_creditcard_number('0001234')
+        self.assertEqual('###1234', result)
+
     # Remove duplicate words
     def test_remove_duplicate_words_none_exist(self):
         phrase = 'alpha'
