@@ -7,6 +7,34 @@ import math
 
 class SampleExercises:
     @staticmethod
+    def alphabet_position(text):
+        return " ".join([str(ord(t.lower()) - 96) for t in text if t.isalpha()])
+
+    @staticmethod
+    def count_smileys(arr):
+        return len([a for a in arr if SampleExercises.has_eyes(a)
+                and SampleExercises.has_valid_nose(a)
+                and SampleExercises.has_mouth(a)])
+
+    @staticmethod
+    def has_eyes(face):
+        return len(face) > 0 and (face[:1] == ":" or face[:1] == ";")
+
+    @staticmethod
+    def has_mouth(face):
+        return len(face) > 1 and (face[-1:] == ")" or face[-1:] == "D")
+
+    @staticmethod
+    def has_valid_nose(face):
+        return len(face) == 2 or (len(face) > 2 and (face[1:2] == "-" or face[1:2] == "~"))
+
+    @staticmethod
+    def order_weight(strng):
+        numbers_with_aggregates = [(sum([int(number_group) for number_group in number_groups]), number_groups) for number_groups in strng.split()]
+        sorted_tuples = sorted(numbers_with_aggregates, key=lambda tup: (tup[0], tup[1]))
+        return ' '.join([t[1] for t in sorted_tuples])
+
+    @staticmethod
     def tribonacci(signature, n):
         if n < 3:
             return signature[:n]
